@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apertur — Focus what matters. Cut what doesn't.</title>
+<meta name="description" content="Pre-flight creative intelligence. Predict attention, identify audience, and spot whitespace opportunities before you launch." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #0A0C0E;
+  --bg-panel: #11151A;
+  --bg-card: #161B21;
+  --border: #20262E;
+  --border-strong: #2A3139;
+  --text: #FFFFFF;
+  --text-mid: #B8BDC4;
+  --text-muted: #6C737D;
+  --teal: #1A9E8F;
+  --teal-bright: #2FB8A7;
+  --red: #E8503A;
+  --amber: #D97706;
+  --blue: #2E75B6;
+  --serif: "Instrument Serif", Georgia, serif;
+  --sans: "DM Sans", -apple-system, sans-serif;
+  --mono: "DM Mono", Consolas, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--teal); color: var(--bg); }
+
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 1;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ===== NAV ===== */
+nav.primary {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(10,12,14,0.7);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--serif); font-size: 24px;
+  letter-spacing: -0.01em; color: var(--text); text-decoration: none;
+}
+.logo-mark {
+  width: 20px; height: 20px; position: relative; display: inline-block;
+}
+.logo-mark::before, .logo-mark::after {
+  content: ""; position: absolute; border-radius: 50%;
+}
+.logo-mark::before {
+  inset: 0; border: 2px solid var(--teal); opacity: 0.4;
+}
+.logo-mark::after {
+  width: 8px; height: 8px; top: 6px; left: 6px; background: var(--teal);
+}
+.logo em { color: var(--teal); font-style: italic; }
+
+nav.primary ul {
+  display: flex; gap: 36px; list-style: none;
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+nav.primary a {
+  color: var(--text-mid); text-decoration: none;
+  transition: color 0.2s;
+}
+nav.primary a:hover { color: var(--teal); }
+.nav-cta {
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 0.08em; padding: 10px 22px;
+  border: 1px solid var(--teal); color: var(--teal);
+  text-decoration: none; text-transform: uppercase;
+  transition: all 0.2s; background: transparent;
+}
+.nav-cta:hover { background: var(--teal); color: var(--bg); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  padding: 120px 48px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 1000px; height: 1000px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(26,158,143,0.12) 0%, transparent 60%);
+  pointer-events: none;
+  animation: breathe 8s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 12px; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--teal);
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s ease-out both;
+}
+.hero-headline {
+  font-family: var(--serif);
+  font-size: clamp(56px, 9vw, 128px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  max-width: 1200px;
+  margin-bottom: 40px;
+  animation: fadeUp 0.8s ease-out 0.2s both;
+}
+.hero-headline em { color: var(--teal); font-style: italic; }
+.hero-headline .cut { color: var(--red); font-style: italic; }
+.hero-sub {
+  font-size: 22px; color: var(--text-mid);
+  max-width: 720px; line-height: 1.5;
+  margin-bottom: 56px;
+  animation: fadeUp 0.8s ease-out 0.4s both;
+}
+.hero-ctas {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  animation: fadeUp 0.8s ease-out 0.6s both;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 18px 32px;
+  font-family: var(--mono); font-size: 13px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; border: 1px solid transparent;
+  transition: all 0.2s; cursor: pointer;
+}
+.btn-primary { background: var(--teal); color: var(--bg); }
+.btn-primary:hover {
+  background: var(--teal-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(26,158,143,0.3);
+}
+.btn-secondary {
+  background: transparent; color: var(--text);
+  border-color: var(--border-strong);
+}
+.btn-secondary:hover {
+  border-color: var(--teal); color: var(--teal);
+}
+.btn .arrow { display: inline-block; transition: transform 0.2s; }
+.btn:hover .arrow { transform: translateX(4px); }
+.hero-signals {
+  position: absolute; bottom: 48px; left: 48px; right: 48px;
+  display: flex; gap: 48px;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--text-muted); letter-spacing: 0.08em;
+  text-transform: uppercase; flex-wrap: wrap;
+  animation: fadeUp 0.8s ease-out 0.8s both;
+}
+.hero-signals span { color: var(--teal); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SECTIONS ===== */
+section { padding: 160px 48px; position: relative; z-index: 2; }
+.section-label {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-label::before { content: ""; width: 24px; height: 1px; background: var(--teal); }
+h2.section-head {
+  font-family: var(--serif);
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  max-width: 900px;
+  margin-bottom: 32px;
+}
+h2.section-head em { color: var(--teal); font-style: italic; }
+h2.section-head .red { color: var(--red); font-style: italic; }
+.section-intro {
+  font-size: 19px; color: var(--text-mid);
+  max-width: 680px; margin-bottom: 64px;
+}
+
+/* ===== PROBLEM ===== */
+.problem { border-top: 1px solid var(--border); }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.stat-card {
+  padding: 40px 32px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  position: relative; overflow: hidden;
+  transition: all 0.3s;
+}
+.stat-card::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; background: var(--teal);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s;
+}
+.stat-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-4px);
+}
+.stat-card:hover::before { transform: scaleX(1); }
+.stat-number {
+  font-family: var(--serif); font-style: italic;
+  font-size: 72px; line-height: 1;
+  color: var(--teal); margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+.stat-label {
+  font-size: 15px; color: var(--text);
+  margin-bottom: 24px; line-height: 1.5;
+}
+.stat-source {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.tag-red {
+  font-family: var(--mono); font-size: 12px; color: var(--red);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 20px;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.tag-red::before { content: ""; width: 8px; height: 8px; background: var(--red); border-radius: 50%; }
+
+/* ===== SOLUTION ===== */
+.solution {
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.pipelines {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px; margin-top: 80px;
+}
+.pipeline {
+  padding: 40px 28px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  position: relative; transition: all 0.3s;
+}
+.pipeline:hover {
+  border-color: var(--teal);
+  transform: translateY(-6px);
+}
+.pipeline::before {
+  content: ""; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+.pipeline:nth-child(1)::before { background: var(--teal); }
+.pipeline:nth-child(2)::before { background: var(--blue); }
+.pipeline:nth-child(3)::before { background: var(--amber); }
+.pipeline:nth-child(4)::before { background: var(--red); }
+.pipeline-num {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.2em; margin-bottom: 20px;
+}
+.pipeline:nth-child(1) .pipeline-num { color: var(--teal); }
+.pipeline:nth-child(2) .pipeline-num { color: var(--blue); }
+.pipeline:nth-child(3) .pipeline-num { color: var(--amber); }
+.pipeline:nth-child(4) .pipeline-num { color: var(--red); }
+.pipeline-title {
+  font-family: var(--serif); font-size: 26px;
+  line-height: 1.15; margin-bottom: 16px; font-style: italic;
+}
+.pipeline-sub {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--text-muted); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+.pipeline-desc { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+
+/* ===== SHOWCASE ===== */
+.showcase { border-top: 1px solid var(--border); }
+.showcase-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; margin-top: 80px; align-items: start;
+}
+.showcase-ad {
+  position: relative; aspect-ratio: 4/5;
+  background: linear-gradient(180deg, #2A2010 0%, #1A1408 100%);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.showcase-ad-headline {
+  font-family: var(--serif); font-style: italic;
+  font-size: 64px; color: #D4A373;
+  text-align: center; line-height: 1;
+}
+.showcase-ad-sub {
+  font-size: 14px; color: #C8B99C;
+  margin-top: 12px; text-align: center;
+  position: absolute; bottom: 80px; left: 0; right: 0;
+}
+.marker {
+  position: absolute; width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 18px; font-weight: 700;
+  color: white; border: 3px solid white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6); z-index: 2;
+}
+.marker-1 { background: var(--teal); top: 35%; left: 25%; }
+.marker-2 { background: var(--blue); top: 25%; left: 55%; }
+.marker-3 { background: var(--amber); top: 55%; left: 65%; }
+.marker-4 { background: var(--red); top: 75%; left: 40%; }
+.showcase-lines { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.showcase-panel {
+  padding: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.grade-block {
+  display: flex; align-items: center; gap: 20px;
+  margin-bottom: 32px; padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.grade-badge {
+  width: 72px; height: 72px;
+  background: rgba(26,158,143,0.15);
+  font-family: var(--serif); font-size: 42px;
+  font-style: italic; font-weight: 700;
+  color: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.grade-title {
+  font-family: var(--serif); font-style: italic;
+  font-size: 28px; margin-bottom: 4px;
+}
+.grade-context { font-size: 13px; color: var(--text-muted); }
+.attr-row {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.attr-row:last-child { border: none; padding-bottom: 0; }
+.attr-label {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--text-muted); letter-spacing: 0.15em;
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.attr-value { font-size: 14px; color: var(--text); }
+
+/* ===== DIFF TABLE ===== */
+.diff {
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.comparison-table {
+  width: 100%; border-collapse: collapse;
+  margin-top: 56px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+.comparison-table th,
+.comparison-table td {
+  padding: 20px 24px; text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.comparison-table th {
+  font-family: var(--mono); font-size: 11px;
+  font-weight: 500; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--text-muted);
+  background: var(--bg-card);
+}
+.comparison-table th.apertur-col {
+  color: var(--teal);
+  background: rgba(26,158,143,0.06);
+}
+.comparison-table td { font-size: 14px; color: var(--text-mid); }
+.comparison-table td.apertur-col {
+  color: var(--text);
+  background: rgba(26,158,143,0.03);
+  border-left: 1px solid rgba(26,158,143,0.15);
+  border-right: 1px solid rgba(26,158,143,0.15);
+}
+.check { color: var(--teal); font-size: 18px; }
+.dash { color: var(--text-muted); }
+.apertur-col .check { font-weight: 700; }
+.comparison-table tr:last-child td { border-bottom: none; }
+
+/* ===== WHO ===== */
+.who { border-top: 1px solid var(--border); }
+.icps {
+  display: flex; flex-direction: column; gap: 16px;
+  margin-top: 80px;
+}
+.icp {
+  padding: 40px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px; transition: all 0.3s; position: relative;
+}
+.icp::before {
+  content: ""; position: absolute;
+  top: 0; bottom: 0; left: 0; width: 3px;
+}
+.icp:nth-child(1)::before { background: var(--teal); }
+.icp:nth-child(2)::before { background: var(--blue); }
+.icp:nth-child(3)::before { background: var(--amber); }
+.icp:hover {
+  border-color: var(--border-strong);
+  transform: translateX(8px);
+}
+.icp-title {
+  font-family: var(--serif); font-size: 28px;
+  font-style: italic; line-height: 1.1; margin-bottom: 10px;
+}
+.icp-audience {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.1em;
+}
+.icp:nth-child(1) .icp-audience { color: var(--teal); }
+.icp:nth-child(2) .icp-audience { color: var(--blue); }
+.icp:nth-child(3) .icp-audience { color: var(--amber); }
+.icp-col h4 {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 8px; font-weight: 500;
+}
+.icp-col p { font-size: 14px; line-height: 1.5; color: var(--text-mid); }
+.icp-col.value p { color: var(--text); }
+
+/* ===== PRICING ===== */
+.pricing {
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.tiers {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 80px;
+}
+.tier {
+  padding: 40px 32px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  position: relative; transition: all 0.3s;
+}
+.tier:hover { transform: translateY(-6px); }
+.tier.featured {
+  border-color: var(--teal);
+  background: linear-gradient(180deg, rgba(26,158,143,0.06) 0%, var(--bg) 100%);
+}
+.tier-badge {
+  position: absolute; top: -12px; left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 18px; background: var(--teal); color: var(--bg);
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+}
+.tier-name {
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.tier:nth-child(1) .tier-name { color: var(--text-mid); }
+.tier:nth-child(2) .tier-name { color: var(--teal); }
+.tier:nth-child(3) .tier-name { color: var(--amber); }
+.tier-price {
+  font-family: var(--serif); font-style: italic;
+  font-size: 64px; line-height: 1;
+  margin-bottom: 6px; letter-spacing: -0.02em;
+}
+.tier-period {
+  font-family: var(--sans); font-size: 15px;
+  color: var(--text-muted); font-style: normal;
+}
+.tier-features { list-style: none; margin: 40px 0; }
+.tier-features li {
+  padding: 10px 0; font-size: 14px; color: var(--text-mid);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.tier-features li:last-child { border: none; }
+.tier-features li::before {
+  content: "✓"; color: var(--teal); font-weight: 700; flex-shrink: 0;
+}
+.tier-cta {
+  display: block; padding: 14px; text-align: center;
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid var(--border-strong);
+  color: var(--text); text-decoration: none;
+  transition: all 0.2s;
+}
+.tier-cta:hover { border-color: var(--teal); color: var(--teal); }
+.tier.featured .tier-cta {
+  background: var(--teal); color: var(--bg); border-color: var(--teal);
+}
+.tier.featured .tier-cta:hover { background: var(--teal-bright); }
+
+/* ===== VALIDATION ===== */
+.validation { border-top: 1px solid var(--border); }
+.val-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 24px; margin-top: 80px;
+}
+.val-card {
+  padding: 36px 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.val-number {
+  font-family: var(--serif); font-style: italic;
+  font-size: 56px; line-height: 1;
+  color: var(--teal); margin-bottom: 8px;
+}
+.val-number-label {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 24px;
+}
+.val-text {
+  font-size: 14px; color: var(--text-mid);
+  line-height: 1.5; margin-bottom: 16px;
+}
+.val-source {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.1em; color: var(--text-muted);
+}
+
+/* ===== FINAL CTA ===== */
+.final-cta {
+  padding: 160px 48px; text-align: center;
+  background: radial-gradient(ellipse at center, rgba(26,158,143,0.1) 0%, transparent 60%), var(--bg);
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+.final-cta h2 {
+  font-family: var(--serif);
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 1.05;
+  margin-bottom: 32px;
+  letter-spacing: -0.015em;
+}
+.final-cta h2 em { color: var(--teal); font-style: italic; }
+.final-cta h2 .red { color: var(--red); font-style: italic; }
+.final-cta p {
+  font-size: 20px; color: var(--text-mid);
+  margin-bottom: 56px; max-width: 600px;
+  margin-left: auto; margin-right: auto;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 64px 48px 40px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-panel);
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.footer-brand .logo { margin-bottom: 16px; }
+.footer-brand p {
+  font-size: 14px; color: var(--text-muted);
+  line-height: 1.6; max-width: 320px;
+}
+footer h5 {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px; font-weight: 500;
+}
+footer ul { list-style: none; }
+footer li { margin-bottom: 12px; }
+footer a {
+  color: var(--text-mid); text-decoration: none;
+  font-size: 14px; transition: color 0.2s;
+}
+footer a:hover { color: var(--teal); }
+.footer-bottom {
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--text-muted); letter-spacing: 0.1em;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  nav.primary { padding: 16px 24px; }
+  nav.primary ul { display: none; }
+  section, .hero, .final-cta { padding-left: 24px; padding-right: 24px; }
+  .hero { padding-top: 100px; padding-bottom: 60px; }
+  section { padding-top: 100px; padding-bottom: 100px; }
+  .hero-signals { position: static; margin-top: 60px; gap: 20px; flex-direction: column; }
+  .stats-grid, .pipelines, .val-grid, .tiers { grid-template-columns: 1fr; }
+  .showcase-grid { grid-template-columns: 1fr; gap: 24px; }
+  .icp { grid-template-columns: 1fr; gap: 24px; padding: 32px 24px; }
+  .comparison-table { font-size: 12px; }
+  .comparison-table th, .comparison-table td { padding: 14px 12px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 16px; }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav class="primary">
+  <a href="#" class="logo"><span class="logo-mark"></span>Aper<em>tur</em></a>
+  <ul>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#who">For teams</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#science">Science</a></li>
+  </ul>
+  <a href="#demo" class="nav-cta">Request demo</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">Pre-flight creative intelligence</div>
+  <h1 class="hero-headline">
+    <em>Focus</em> what matters.<br>
+    <span class="cut">Cut</span> what doesn't.
+  </h1>
+  <p class="hero-sub">
+    Apertur predicts attention, identifies audience, and spots whitespace
+    opportunities before you launch. Every ad, analysed in ten seconds.
+  </p>
+  <div class="hero-ctas">
+    <a href="#demo" class="btn btn-primary">
+      Request a demo <span class="arrow">→</span>
+    </a>
+    <a href="#how" class="btn btn-secondary">See how it works</a>
+  </div>
+  <div class="hero-signals">
+    <div>Neural attention · <span>DeepGaze IIE + III</span></div>
+    <div>AI vision · <span>Claude 4.6</span></div>
+    <div>5-dimension · <span>CARF scoring</span></div>
+    <div>Calibrated · <span>AUC 0.76 / CC 0.88</span></div>
+  </div>
+</section>
+
+<section class="problem reveal" id="problem">
+  <div class="tag-red">The problem</div>
+  <h2 class="section-head">
+    Brands waste <span class="red">$200B+</span> a year on creative <em>no one looks at.</em>
+  </h2>
+  <p class="section-intro">
+    Attention is the scarcest resource in marketing — yet most teams ship creative on gut feel,
+    discovering performance issues only after media spend is gone.
+  </p>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">47%</div>
+      <div class="stat-label">of ads fail to capture attention in the feed</div>
+      <div class="stat-source">Nielsen, 2024</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">1.7s</div>
+      <div class="stat-label">average attention time per ad on Meta feed</div>
+      <div class="stat-source">Meta, 2023</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">$3.2B</div>
+      <div class="stat-label">wasted annually on un-viewed creative — per major retailer</div>
+      <div class="stat-source">WARC, 2024</div>
+    </div>
+  </div>
+</section>
+
+<section class="solution reveal" id="how">
+  <div class="section-label">How it works</div>
+  <h2 class="section-head">Four signals. <em>One score.</em></h2>
+  <p class="section-intro">
+    Every creative gets analysed across four independent AI pipelines in parallel — then synthesised
+    into a single, actionable report.
+  </p>
+  <div class="pipelines">
+    <div class="pipeline">
+      <div class="pipeline-num">01</div>
+      <div class="pipeline-title">Neural attention</div>
+      <div class="pipeline-sub">DeepGaze IIE</div>
+      <div class="pipeline-desc">
+        Predicts a heatmap of where viewers will look, trained on MIT/CAT2000 eye-tracking datasets
+        with millions of real fixations.
+      </div>
+    </div>
+    <div class="pipeline">
+      <div class="pipeline-num">02</div>
+      <div class="pipeline-title">Scanpath sequence</div>
+      <div class="pipeline-sub">Peak detection + inhibition</div>
+      <div class="pipeline-desc">
+        Predicts viewing order — face first? headline? CTA? — so you know what viewers see in the first
+        1 second of exposure.
+      </div>
+    </div>
+    <div class="pipeline">
+      <div class="pipeline-num">03</div>
+      <div class="pipeline-title">Semantic understanding</div>
+      <div class="pipeline-sub">Claude 4.6 vision</div>
+      <div class="pipeline-desc">
+        Identifies brand, audience, offer, tone, and competitors — and reveals whitespace gaps
+        competitors haven't exploited.
+      </div>
+    </div>
+    <div class="pipeline">
+      <div class="pipeline-num">04</div>
+      <div class="pipeline-title">CARF scoring</div>
+      <div class="pipeline-sub">Research-backed framework</div>
+      <div class="pipeline-desc">
+        Combines signals into 5 dimensions: Attention, Emotion, Cognitive Load, Memory, Decision —
+        graded against 200+ research benchmarks.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="showcase reveal">
+  <div class="section-label">What you see</div>
+  <h2 class="section-head">
+    Every creative gets an <em>executive summary</em> in seconds.
+  </h2>
+  <p class="section-intro">
+    Upload any ad — image or video. Get back a scanpath prediction, brand analysis, audience insight,
+    and the single most promising differentiation angle.
+  </p>
+  <div class="showcase-grid">
+    <div class="showcase-ad">
+      <div><div class="showcase-ad-headline">25% OFF</div></div>
+      <div class="showcase-ad-sub">Premium Cotton Tees</div>
+      <svg class="showcase-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <line x1="25" y1="35" x2="55" y2="25" stroke="white" stroke-width="0.3" stroke-dasharray="1,0.8" opacity="0.5" />
+        <line x1="55" y1="25" x2="65" y2="55" stroke="white" stroke-width="0.3" stroke-dasharray="1,0.8" opacity="0.5" />
+        <line x1="65" y1="55" x2="40" y2="75" stroke="white" stroke-width="0.3" stroke-dasharray="1,0.8" opacity="0.5" />
+      </svg>
+      <div class="marker marker-1">1</div>
+      <div class="marker marker-2">2</div>
+      <div class="marker marker-3">3</div>
+      <div class="marker marker-4">4</div>
+    </div>
+    <div class="showcase-panel">
+      <div class="grade-block">
+        <div class="grade-badge">B+</div>
+        <div>
+          <div class="grade-title">Strong</div>
+          <div class="grade-context">for Brand Awareness on Meta Feed</div>
+        </div>
+      </div>
+      <div class="attr-row">
+        <div class="attr-label">Brand</div>
+        <div class="attr-value">Gildan · Mass-market apparel</div>
+      </div>
+      <div class="attr-row">
+        <div class="attr-label">Target audience</div>
+        <div class="attr-value">Print-on-demand buyers, 25-55, US/Canada</div>
+      </div>
+      <div class="attr-row">
+        <div class="attr-label">Strongest dimension</div>
+        <div class="attr-value">Decision Heuristics (A)</div>
+      </div>
+      <div class="attr-row">
+        <div class="attr-label">Weakest link</div>
+        <div class="attr-value">CTA visibility — only 15% of viewers</div>
+      </div>
+      <div class="attr-row">
+        <div class="attr-label">Differentiation angle</div>
+        <div class="attr-value">Category lacks personality — own humour</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="diff reveal">
+  <div class="section-label">Differentiation</div>
+  <h2 class="section-head">
+    We go <em>three steps further</em> than every competitor.
+  </h2>
+  <p class="section-intro">
+    Competing tools show heatmaps. Apertur tells you what to do differently.
+  </p>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Dragonfly AI</th>
+        <th>Attention Insight</th>
+        <th class="apertur-col">Apertur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Attention heatmaps</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td class="apertur-col"><span class="check">✓</span></td></tr>
+      <tr><td>Scanpath prediction</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td class="apertur-col"><span class="check">✓</span></td></tr>
+      <tr><td>AI-identified brand &amp; audience</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td class="apertur-col"><span class="check">✓</span></td></tr>
+      <tr><td>Whitespace opportunity analysis</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td class="apertur-col"><span class="check">✓</span></td></tr>
+      <tr><td>Custom calibration on your own ads</td><td>£££</td><td><span class="dash">—</span></td><td class="apertur-col"><span class="check">✓</span></td></tr>
+      <tr><td>Integrated CARF scoring framework</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td class="apertur-col"><span class="check">✓</span></td></tr>
+      <tr><td>Starting price</td><td>£££ enterprise</td><td>€60/mo</td><td class="apertur-col">£99/mo or free tier</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="who reveal" id="who">
+  <div class="section-label">Who it's for</div>
+  <h2 class="section-head">Three teams. <em>One platform.</em></h2>
+  <p class="section-intro">
+    Whether you're shipping 50 ads a week or pitching the next campaign, Apertur adapts to how
+    creative decisions get made.
+  </p>
+  <div class="icps">
+    <div class="icp">
+      <div>
+        <div class="icp-title">Performance marketing teams</div>
+        <div class="icp-audience">IN-HOUSE · DTC &amp; e-commerce</div>
+      </div>
+      <div class="icp-col">
+        <h4>Pain</h4>
+        <p>Shipping 50+ ads a month with no quality gate before media spend.</p>
+      </div>
+      <div class="icp-col value">
+        <h4>Value</h4>
+        <p>Cut creative waste by 30%. Stop bad ads before they ever launch.</p>
+      </div>
+    </div>
+    <div class="icp">
+      <div>
+        <div class="icp-title">Creative agencies</div>
+        <div class="icp-audience">INDEPENDENT SHOPS &amp; NETWORKS</div>
+      </div>
+      <div class="icp-col">
+        <h4>Pain</h4>
+        <p>Defending creative decisions to sceptical clients without evidence.</p>
+      </div>
+      <div class="icp-col value">
+        <h4>Value</h4>
+        <p>Present evidence-backed creative. Win more pitches. Charge more.</p>
+      </div>
+    </div>
+    <div class="icp">
+      <div>
+        <div class="icp-title">Retailers &amp; marketplaces</div>
+        <div class="icp-audience">PLATFORMS WITH VENDOR AD PROGRAMS</div>
+      </div>
+      <div class="icp-col">
+        <h4>Pain</h4>
+        <p>Thousands of vendor-generated ads with no scalable quality assurance.</p>
+      </div>
+      <div class="icp-col value">
+        <h4>Value</h4>
+        <p>Automated creative scoring at platform scale via API.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing reveal" id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-head">Start free. <em>Scale with confidence.</em></h2>
+  <p class="section-intro">
+    Every customer's calibration data makes the platform smarter for them — and harder to replace.
+  </p>
+  <div class="tiers">
+    <div class="tier">
+      <div class="tier-name">Starter</div>
+      <div><span class="tier-price">£99</span><span class="tier-period">/month</span></div>
+      <ul class="tier-features">
+        <li>100 ad analyses per month</li>
+        <li>Attention &amp; scanpath prediction</li>
+        <li>AI creative intelligence</li>
+        <li>Whitespace opportunities</li>
+        <li>Email support</li>
+      </ul>
+      <a href="#demo" class="tier-cta">Start free trial</a>
+    </div>
+    <div class="tier featured">
+      <div class="tier-badge">Most popular</div>
+      <div class="tier-name">Growth</div>
+      <div><span class="tier-price">£499</span><span class="tier-period">/month</span></div>
+      <ul class="tier-features">
+        <li>1,000 ad analyses per month</li>
+        <li>Custom calibration with your ads</li>
+        <li>Team workspace (5 seats)</li>
+        <li>Competitor benchmarking</li>
+        <li>API access</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="#demo" class="tier-cta">Request access</a>
+    </div>
+    <div class="tier">
+      <div class="tier-name">Enterprise</div>
+      <div><span class="tier-price">Custom</span></div>
+      <ul class="tier-features">
+        <li>Unlimited analyses</li>
+        <li>On-premise deployment</li>
+        <li>Custom model training</li>
+        <li>Dedicated CSM &amp; SLA</li>
+        <li>SOC 2 Type II compliance</li>
+      </ul>
+      <a href="#demo" class="tier-cta">Contact sales</a>
+    </div>
+  </div>
+</section>
+
+<section class="validation reveal" id="science">
+  <div class="section-label">The science</div>
+  <h2 class="section-head">
+    Built on <em>peer-reviewed</em> attention research.
+  </h2>
+  <p class="section-intro">
+    Apertur's predictions draw on three decades of eye-tracking and attention science — not vibes.
+  </p>
+  <div class="val-grid">
+    <div class="val-card">
+      <div class="val-number">0.76</div>
+      <div class="val-number-label">AUC</div>
+      <div class="val-text">Heuristic model accuracy on MIT/CAT2000 benchmark datasets.</div>
+      <div class="val-source">Jan 2026 validation</div>
+    </div>
+    <div class="val-card">
+      <div class="val-number">0.88</div>
+      <div class="val-number-label">CC</div>
+      <div class="val-text">DeepGaze IIE neural correlation on held-out advertising imagery.</div>
+      <div class="val-source">Kümmerer et al. 2021</div>
+    </div>
+    <div class="val-card">
+      <div class="val-number">200+</div>
+      <div class="val-number-label">Papers</div>
+      <div class="val-text">Published research integrated into the CARF scoring model.</div>
+      <div class="val-source">Pieters, Wedel, Zhang et al.</div>
+    </div>
+    <div class="val-card">
+      <div class="val-number">5</div>
+      <div class="val-number-label">Dimensions</div>
+      <div class="val-text">Attention · Emotion · Cognitive Load · Memory · Decision.</div>
+      <div class="val-source">Each independently benchmarked</div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta reveal" id="demo">
+  <h2>
+    <em>Focus</em> what matters.<br>
+    <span class="red">Cut</span> what doesn't.
+  </h2>
+  <p>Book a 20-minute demo. We'll run your last 5 ads through Apertur — live.</p>
+  <a href="mailto:hello@apertur.ai" class="btn btn-primary">
+    Request a demo <span class="arrow">→</span>
+  </a>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo"><span class="logo-mark"></span>Aper<em>tur</em></div>
+      <p>Pre-flight creative intelligence for advertising teams. Focus what matters. Cut what doesn't.</p>
+    </div>
+    <div>
+      <h5>Product</h5>
+      <ul>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#science">Science</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Research</a></li>
+        <li><a href="#">Investors</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Get in touch</h5>
+      <ul>
+        <li><a href="mailto:hello@apertur.ai">hello@apertur.ai</a></li>
+        <li><a href="mailto:invest@apertur.ai">invest@apertur.ai</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 APERTUR · ALL RIGHTS RESERVED</div>
+    <div>FOCUS WHAT MATTERS · CUT WHAT DOESN'T</div>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (ev) => {
+    const id = a.getAttribute('href');
+    if (id.length > 1) {
+      const el = document.querySelector(id);
+      if (el) {
+        ev.preventDefault();
+        const top = el.getBoundingClientRect().top + window.scrollY - 60;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>

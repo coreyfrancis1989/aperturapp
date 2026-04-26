@@ -1,0 +1,29 @@
+# Core ML stack
+torch==2.2.2
+torchvision==0.17.2
+
+# DeepGaze IIE for attention prediction
+git+https://github.com/matthias-k/DeepGaze.git
+
+# CLIP for semantic understanding
+git+https://github.com/openai/CLIP.git
+ftfy
+regex
+
+# Image and array processing
+einops>=0.7.0
+scipy>=1.10.0
+Pillow>=10.0.0
+numpy<2
+
+# Web server
+flask>=3.0.0
+flask-cors>=4.0.0
+gunicorn>=21.0.0
+
+# Anthropic API client (for the AI creative read pipeline)
+anthropic>=0.40.0
+
+# Misc utilities
+python-dotenv>=1.0.0
+requests>=2.31.0

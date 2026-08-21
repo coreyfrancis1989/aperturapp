@@ -300,6 +300,49 @@
     });
   }
 
+  // Klaviyo integration (Apertur's own account — public key is safe to expose
+  // client-side; it only grants "create a client event/subscription", nothing
+  // read-level). Subscribes the email to the given list, and later logs the
+  // pasted headline as an event property on that same profile.
+  var KLAVIYO_PUBLIC_KEY = 'WSBpg3';
+  var KLAVIYO_LIST_ID = 'Ruubsu';
+  var KLAVIYO_REVISION = '2024-10-15';
+
+  function klaviyoSubscribeEmail(email){
+    return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', revision: KLAVIYO_REVISION },
+      body: JSON.stringify({
+        data: {
+          type: 'subscription',
+          attributes: {
+            profile: { data: { type: 'profile', attributes: { email: email } } }
+          },
+          relationships: {
+            list: { data: { type: 'list', id: KLAVIYO_LIST_ID } }
+          }
+        }
+      })
+    });
+  }
+
+  function klaviyoLogHeadlineEvent(email, headline){
+    return fetch('https://a.klaviyo.com/client/events/?company_id=' + KLAVIYO_PUBLIC_KEY, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', revision: KLAVIYO_REVISION },
+      body: JSON.stringify({
+        data: {
+          type: 'event',
+          attributes: {
+            properties: { headline: headline },
+            metric: { data: { type: 'metric', attributes: { name: 'Requested Beta Access' } } },
+            profile: { data: { type: 'profile', attributes: { email: email } } }
+          }
+        }
+      })
+    });
+  }
+
   var gateForm = document.getElementById('gate-form');
   var emailInput = document.getElementById('wheel-email');
   var emailError = document.getElementById('email-error');
@@ -311,10 +354,11 @@
       return;
     }
     emailError.textContent = '';
-    // TODO(lead capture): this email is only ever held in memory below — there is
-    // no backend wired up yet. Before relying on this page for real leads, POST
-    // `capturedEmail` to a real endpoint here (form service, CRM webhook, etc.).
     window.__aperturAccessLead = { email: email, capturedAt: new Date().toISOString() };
+    // Fire-and-forget: don't block the UI on the network round trip. Errors are
+    // logged, not surfaced to the visitor — a failed subscribe shouldn't stop
+    // someone from playing the wheel.
+    klaviyoSubscribeEmail(email).catch(function(err){ console.error('Klaviyo subscribe failed', err); });
     showPhase('ready');
   });
 
@@ -352,9 +396,11 @@
     e.preventDefault();
     showPhase('grading');
     var line = taskText.value.trim();
-    // TODO(lead capture): the pasted headline, like the email above, is never sent
-    // anywhere — capture it alongside the email lead once a backend exists.
     if (window.__aperturAccessLead) window.__aperturAccessLead.headline = line;
+    if (window.__aperturAccessLead && window.__aperturAccessLead.email && line) {
+      klaviyoLogHeadlineEvent(window.__aperturAccessLead.email, line)
+        .catch(function(err){ console.error('Klaviyo event failed', err); });
+    }
 
     function finish(roast){
       verdictLine.textContent = '"' + roast + '"';

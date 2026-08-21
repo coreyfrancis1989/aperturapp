@@ -293,7 +293,6 @@
     <span><i class="sw-available"></i>Available</span>
     <span><i class="sw-taken"></i>Taken</span>
   </div>
-  <p class="sample-flag">Seat count is fixed display copy, not a live counter — wire to a real seats system before relying on it.</p>
 </div>
 
 <footer>
@@ -367,16 +366,26 @@
     labelsEl.appendChild(el);
   });
 
-  // Seats tracker: fixed display data (not a live counter — see the flag under the grid).
-  var totalSeats = 60, takenSeats = 19;
+  // Seats tracker: backed by /api/seats (a Workers KV counter, see worker.js).
+  // Falls back to a reasonable static split if that endpoint isn't reachable
+  // (e.g. previewing the static files directly with no Worker in front).
   var seatsGrid = document.getElementById('seats-grid');
-  for (var i = 0; i < totalSeats; i++) {
-    var seat = document.createElement('div');
-    seat.className = 'seat ' + (i < takenSeats ? 'taken' : 'available');
-    seatsGrid.appendChild(seat);
+  var seatsDetail = document.getElementById('seats-detail');
+  function renderSeats(total, taken){
+    seatsGrid.innerHTML = '';
+    for (var i = 0; i < total; i++) {
+      var seat = document.createElement('div');
+      seat.className = 'seat ' + (i < taken ? 'taken' : 'available');
+      seatsGrid.appendChild(seat);
+    }
+    seatsDetail.textContent = (total - taken) + ' of ' + total + " left — the rest went to the wheel, not a waitlist";
   }
-  document.getElementById('seats-detail').textContent =
-    (totalSeats - takenSeats) + ' of ' + totalSeats + " left — the rest went to the wheel, not a waitlist";
+  function loadSeats(){
+    fetch('/api/seats').then(function(r){ return r.json(); })
+      .then(function(d){ renderSeats(d.total, d.taken); })
+      .catch(function(){ renderSeats(60, 19); });
+  }
+  loadSeats();
 
   var phases = ['gate', 'ready', 'spinning', 'task', 'grading', 'won'];
   function showPhase(name){
@@ -594,6 +603,16 @@
         last_name: last,
         properties: { website: website }
       }).catch(function(err){ console.error('Klaviyo profile update failed', err); });
+
+      // This is the "a seat gets used" moment — claims once per email per
+      // month (see worker.js), then refreshes the tracker to show it.
+      fetch('/api/seats/claim', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      }).then(function(r){ return r.json(); })
+        .then(function(d){ renderSeats(d.total, d.taken); })
+        .catch(function(err){ console.error('Seat claim failed', err); });
     }
 
     // 20-second loading state, cycling through at most 3 quotes (picked at random

@@ -5,9 +5,17 @@
   "observability": {
     "enabled": true
   },
+  "main": "worker.js",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS"
   },
+  "kv_namespaces": [
+    {
+      "binding": "SEATS",
+      "id": "1d713608941a4841a86bde9522a84fc8"
+    }
+  ],
   "compatibility_flags": [
     "nodejs_compat"
   ]

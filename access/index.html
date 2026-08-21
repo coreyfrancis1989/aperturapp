@@ -29,6 +29,7 @@
     --accent-light:#d2cefd;
     --accent-lighter:#b5abfc;
     --accent-lightest:#e7e5fe;
+    --error:#e9a08a;
   }
   *{box-sizing:border-box}
   body{
@@ -43,8 +44,8 @@
   }
   a{color:var(--accent-light);text-decoration:none}
   a:hover{color:var(--accent-lightest)}
-  input::placeholder{color:var(--text-faint)}
-  input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  input::placeholder,textarea::placeholder{color:var(--text-faint)}
+  input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
   header{
     padding:24px 32px;display:flex;align-items:center;gap:12px;
@@ -57,7 +58,7 @@
   @media (max-width:640px){header .badge{display:none}}
 
   main{
-    flex:1;display:grid;grid-template-columns:1fr minmax(0,480px);gap:40px;
+    display:grid;grid-template-columns:1fr minmax(0,480px);gap:40px;
     padding:40px 32px 48px;max-width:1200px;margin:0 auto;width:100%;align-items:center;
   }
   @media (max-width:900px){main{grid-template-columns:1fr;justify-items:center;text-align:center}}
@@ -70,16 +71,22 @@
   h1{margin:0;font-size:clamp(28px,4.6vw,48px);line-height:1.05;font-weight:500;letter-spacing:-.03em}
   h1 .dim{color:var(--text-muted)}
   .lede{margin:0;font-size:17px;line-height:1.55;color:var(--text-70)}
+  .kicker{font-size:11px;letter-spacing:.2em;color:var(--text-muted);text-transform:uppercase}
+  .verdict{margin:0;font-size:19px;line-height:1.45;font-style:italic;color:var(--text)}
 
   .email-row{display:flex;flex-direction:column;gap:10px;max-width:440px;width:100%}
-  .email-row label{font-size:11px;letter-spacing:.2em;color:var(--text-muted)}
+  .email-row label,.task-row label{font-size:11px;letter-spacing:.2em;color:var(--text-muted)}
   .email-inputs{display:flex;gap:10px}
   @media (max-width:480px){.email-inputs{flex-direction:column}}
-  .email-inputs input{
+  .email-inputs input,.task-row textarea{
     flex:1;padding:13px 15px;border-radius:8px;background:var(--surface);
     border:1px solid var(--border-2);color:var(--text);font-size:15px;font-family:inherit;min-width:0;
   }
+  .task-row textarea{resize:none;width:100%}
   .hint{font-size:12px;color:var(--text-faint)}
+
+  .task-row{display:flex;flex-direction:column;gap:10px;max-width:440px;width:100%}
+  @media (max-width:900px){.task-row{align-items:center}}
 
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -95,7 +102,7 @@
   .cta-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
   @media (max-width:900px){.cta-row{justify-content:center}}
   .fine-print{font-size:12px;color:var(--text-faint)}
-  .error-msg{font-size:13px;color:#e9a08a;min-height:16px}
+  .error-msg{font-size:13px;color:var(--error);min-height:16px}
 
   /* Wheel */
   .wheel-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
@@ -123,6 +130,25 @@
   }
   .wheel-hub .logo-mark{width:16px;height:16px}
   .wheel-caption{font-size:12px;letter-spacing:.18em;color:var(--text-faint)}
+
+  /* Seats tracker */
+  .seats{
+    padding:32px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:16px;
+    max-width:1200px;margin:0 auto;width:100%;
+  }
+  .seats-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .seats-head .kicker{margin:0}
+  .seats-head .detail{font-size:13px;color:var(--text-mid)}
+  .seats-grid{display:flex;flex-wrap:wrap;gap:7px}
+  .seat{width:14px;height:14px;border-radius:3px;transition:opacity .25s}
+  .seat.taken{background:var(--surface);border:1px solid var(--border)}
+  .seat.available{background:transparent;border:1px solid var(--accent);box-shadow:0 0 6px rgba(145,132,217,.35)}
+  .seats-legend{display:flex;gap:20px;font-size:12px;color:var(--text-muted)}
+  .seats-legend span{display:inline-flex;align-items:center;gap:7px}
+  .seats-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .seats-legend .sw-available{border:1px solid var(--accent)}
+  .seats-legend .sw-taken{background:var(--surface)}
+  .sample-flag{font-size:11px;color:var(--text-faint);margin:0}
 
   footer{
     padding:20px 32px;border-top:1px solid var(--border);display:flex;gap:24px;
@@ -172,14 +198,29 @@
       <p class="lede">This is the most rigorous part of our sales process.</p>
     </div>
 
-    <div class="phase" id="phase-nearmiss" hidden>
-      <h1>Next time.</h1>
-      <p class="lede">One slice off. That's the same margin your last campaign lost by — you just didn't get a pointer showing you where.</p>
+    <div class="phase" id="phase-task" hidden>
+      <h1>The wheel says no.<br><span class="dim">We have a consolation bit.</span></h1>
+      <p class="lede">Paste the headline you're still weirdly proud of. We'll roast it for free, then let you in anyway.</p>
+      <form class="task-row" id="task-form" novalidate>
+        <label for="task-text">Your headline</label>
+        <textarea id="task-text" rows="2" placeholder='e.g. &quot;Unlock Your Potential Today!™&quot;'></textarea>
+        <div class="cta-row">
+          <button type="submit" class="btn" id="roast-btn">Roast me →</button>
+        </div>
+      </form>
+      <p class="fine-print">The wheel gave you a rain check. This is the real door.</p>
+    </div>
+
+    <div class="phase" id="phase-grading" hidden>
+      <h1 class="dim">Reading it.</h1>
+      <p class="lede">Grading against 200+ benchmarks. This won't take long — it never does.</p>
     </div>
 
     <div class="phase" id="phase-won" hidden>
-      <h1>Fine. Take it.<br><span style="color:var(--accent-lighter)">Beta access.</span></h1>
-      <p class="lede">Unlimited analyses, the model calibrated on your own archive, and a direct line to the founding team. Send five ads and we'll run them live in twenty minutes.</p>
+      <div class="kicker">The verdict</div>
+      <p class="verdict" id="verdict-line"></p>
+      <h1>Fine. That counts.<br><span style="color:var(--accent-lighter)">Beta access.</span></h1>
+      <p class="lede">You did the reading the wheel wasn't going to make you do. Unlimited analyses, the model calibrated on your own archive, and a direct line to the founding team. Send five ads and we'll run them live in twenty minutes.</p>
       <div class="cta-row">
         <a class="btn lg" id="claim-btn" href="mailto:hello@apertur.app?subject=Claim%20beta%20access">Claim your seat →</a>
         <span class="fine-print">Expires in 24 hours. Genuinely.</span>
@@ -199,6 +240,19 @@
     <div class="wheel-caption">2 of 8 slices are access</div>
   </div>
 </main>
+
+<div class="seats">
+  <div class="seats-head">
+    <div class="kicker">Seats this month</div>
+    <div class="detail" id="seats-detail"></div>
+  </div>
+  <div class="seats-grid" id="seats-grid"></div>
+  <div class="seats-legend">
+    <span><i class="sw-available"></i>Available</span>
+    <span><i class="sw-taken"></i>Taken</span>
+  </div>
+  <p class="sample-flag">Seat count is fixed display copy, not a live counter — wire to a real seats system before relying on it.</p>
+</div>
 
 <footer>
   <div>Apertur · Creative performance intelligence</div>
@@ -228,7 +282,18 @@
     labelsEl.appendChild(el);
   });
 
-  var phases = ['gate', 'ready', 'spinning', 'nearmiss', 'won'];
+  // Seats tracker: fixed display data (not a live counter — see the flag under the grid).
+  var totalSeats = 60, takenSeats = 19;
+  var seatsGrid = document.getElementById('seats-grid');
+  for (var i = 0; i < totalSeats; i++) {
+    var seat = document.createElement('div');
+    seat.className = 'seat ' + (i < takenSeats ? 'taken' : 'available');
+    seatsGrid.appendChild(seat);
+  }
+  document.getElementById('seats-detail').textContent =
+    (totalSeats - takenSeats) + ' of ' + totalSeats + " left — the rest went to the wheel, not a waitlist";
+
+  var phases = ['gate', 'ready', 'spinning', 'task', 'grading', 'won'];
   function showPhase(name){
     phases.forEach(function(p){
       document.getElementById('phase-' + p).hidden = (p !== name);
@@ -256,14 +321,65 @@
   var disc = document.getElementById('wheel-disc');
   document.getElementById('spin-btn').addEventListener('click', function(){
     showPhase('spinning');
+    // The wheel's visual result is cosmetic — every spin leads to the task phase below,
+    // never a direct win. Matches the design's own two possible spin targets.
+    var target = Math.random() < 0.5 ? -1575 : 1665;
     disc.style.transition = 'transform 3.6s cubic-bezier(.14,.82,.22,1)';
-    requestAnimationFrame(function(){ disc.style.transform = 'rotate(-1575deg)'; });
-    setTimeout(function(){ showPhase('nearmiss'); }, 3700);
-    setTimeout(function(){
-      disc.style.transition = 'transform 1.1s cubic-bezier(.14,.82,.22,1)';
-      disc.style.transform = 'rotate(-1620deg)';
-    }, 5400);
-    setTimeout(function(){ showPhase('won'); }, 6300);
+    requestAnimationFrame(function(){ disc.style.transform = 'rotate(' + target + 'deg)'; });
+    setTimeout(function(){ showPhase('task'); }, 3700);
+  });
+
+  var fallbackRoasts = [
+    "Bold. Also the seventh headline we've seen today that starts with “Unlock.”",
+    "This tested well in a meeting. Nowhere else.",
+    "Points for confidence. None for clarity.",
+    "A stock photo would have carried this further.",
+    "We've seen this exact line lose to a blank ad. Twice."
+  ];
+  var cleanComebacks = [
+    "We asked for a headline, not a deposition. Access granted anyway.",
+    "That's not copy, that's a cry for help. Beta's yours — maybe take a walk first.",
+    "Spicy. Unusable in an ad, but we respect the commitment. You're in.",
+    "Save that energy for the comments section. Access granted.",
+    "Our legal team asked us to just say: access granted, and please calm down."
+  ];
+  var profanity = /\b(fuck\w*|shit\w*|bitch\w*|cunt\w*|dick\w*|asshole\w*|bastard\w*|piss\w*|cock\w*|twat\w*|damn\w*)\b/i;
+
+  var taskForm = document.getElementById('task-form');
+  var taskText = document.getElementById('task-text');
+  var verdictLine = document.getElementById('verdict-line');
+  taskForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    showPhase('grading');
+    var line = taskText.value.trim();
+    // TODO(lead capture): the pasted headline, like the email above, is never sent
+    // anywhere — capture it alongside the email lead once a backend exists.
+    if (window.__aperturAccessLead) window.__aperturAccessLead.headline = line;
+
+    function finish(roast){
+      verdictLine.textContent = '"' + roast + '"';
+      showPhase('won');
+    }
+
+    if (profanity.test(line)) {
+      finish(cleanComebacks[Math.floor(Math.random() * cleanComebacks.length)]);
+      return;
+    }
+
+    var fallback = fallbackRoasts[Math.floor(Math.random() * fallbackRoasts.length)];
+    // window.claude.complete only exists inside a Claude Artifact runtime — on this
+    // standalone site it's undefined, so this always falls through to the canned
+    // fallback roasts above. Wire a real backend (e.g. a Worker route calling an
+    // LLM API) if live-generated roasts matter for launch.
+    if (window.claude && typeof window.claude.complete === 'function') {
+      var prompt = 'You are a blunt, deadpan ad critic for a brand called Apertur. A user just pasted the headline from their worst-performing ad: "' + line.slice(0, 300) + '". Write ONE short, witty, cutting roast of it (max 18 words, one sentence, no quotation marks, no hashtags, no emoji). Be specific to what they wrote, not generic.';
+      window.claude.complete(prompt).then(function(resp){
+        var clean = (resp || '').trim().replace(/^["']|["']$/g, '');
+        finish(clean && clean.length < 240 ? clean : fallback);
+      }).catch(function(){ finish(fallback); });
+    } else {
+      setTimeout(function(){ finish(fallback); }, 300);
+    }
   });
 })();
 </script>

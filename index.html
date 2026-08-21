@@ -56,10 +56,10 @@
     border-bottom:1px solid var(--border);
   }
   .nav-row{display:flex;align-items:center;gap:22px;padding:14px 0}
-  .logo{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;letter-spacing:-.02em;margin-right:auto;text-decoration:none}
+  .logo{display:inline-flex;align-items:center;gap:11px;font-weight:600;font-size:20px;letter-spacing:-.02em;margin-right:auto;text-decoration:none}
   .logo-text span{color:var(--accent)}
-  .logo-mark{width:20px;height:20px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
-  .logo-mark i{width:7px;height:7px;border-radius:50%;background:var(--accent);display:block}
+  .logo-mark{width:25px;height:25px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
+  .logo-mark i{width:9px;height:9px;border-radius:50%;background:var(--accent);display:block}
   .nav-links{display:flex;gap:22px;font-size:13px;color:var(--text-70);list-style:none;margin:0;padding:0}
   .nav-links a{text-decoration:none;color:inherit;background:none;border:none;font:inherit;cursor:pointer;padding:0}
   .nav-links a:hover{color:var(--text)}
@@ -194,6 +194,12 @@
   .cta-band{padding:64px 0;text-align:center;border-bottom:1px solid var(--border)}
   .cta-band h2{font-size:32px;font-weight:500;letter-spacing:-.02em;margin:0 0 14px}
   .cta-band p{font-size:15px;color:var(--text-62);max-width:48ch;margin:0 auto 26px}
+  .seats-mini{display:flex;flex-direction:column;align-items:center;gap:9px;margin:0 auto 26px;max-width:280px}
+  .seats-mini[hidden]{display:none}
+  .seats-mini-bar{width:100%;height:4px;border-radius:2px;background:var(--surface-2);overflow:hidden}
+  .seats-mini-fill{height:100%;border-radius:2px;background:var(--accent);width:0%;transition:width .4s ease}
+  .seats-mini-label{font-size:12px;color:var(--text-45)}
+  .seats-mini-label strong{color:var(--accent-light);font-weight:500}
 
   footer{background:var(--footer);padding:44px 0 24px}
   .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;padding-bottom:32px}
@@ -296,6 +302,10 @@
     <div class="wrap">
       <h2>See it on your own account.</h2>
       <p>Request access and we'll walk your ad account through a pre-flight scan and an in-flight attribution pass on your own creative.</p>
+      <div class="seats-mini" id="seats-mini" hidden>
+        <div class="seats-mini-bar"><div class="seats-mini-fill" id="seats-mini-fill"></div></div>
+        <div class="seats-mini-label" id="seats-mini-label"></div>
+      </div>
       <a class="btn lg" href="/access/">Request access →</a>
     </div>
   </section>
@@ -467,6 +477,17 @@
   document.querySelectorAll('[data-tab-link]').forEach(function(a){
     a.addEventListener('click', function(){ setMode(a.getAttribute('data-tab-link')); });
   });
+
+  // Seats-left nudge above the CTA — same live counter as /access (backed by
+  // worker.js + Workers KV). Stays hidden if the endpoint isn't reachable,
+  // rather than showing stale/wrong numbers.
+  fetch('/api/seats').then(function(r){ return r.json(); }).then(function(d){
+    var left = Math.max(0, d.total - d.taken);
+    document.getElementById('seats-mini-fill').style.width = ((d.taken / d.total) * 100) + '%';
+    document.getElementById('seats-mini-label').innerHTML =
+      '<strong>' + left + ' of ' + d.total + '</strong> seats left this month';
+    document.getElementById('seats-mini').hidden = false;
+  }).catch(function(){ /* leave hidden */ });
 })();
 </script>
 </body>

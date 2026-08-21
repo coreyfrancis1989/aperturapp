@@ -336,14 +336,9 @@
       <div class="loading-caption">This takes about 20 seconds.</div>
     </div>
 
-    <div class="modal-step" id="modal-verify" hidden>
-      <h2>Verify your email</h2>
-      <p class="lede">We've sent a verification link to <span class="verify-email" id="verify-email-target"></span>. Click it to activate your account.</p>
-      <div class="cta-row">
-        <button type="button" class="btn" id="resend-btn">Resend email</button>
-        <button type="button" class="btn lg" id="verify-done-btn">Done</button>
-      </div>
-      <p class="sample-flag">No email actually sends yet — there's no account/auth backend behind this modal. Wire it to a real signup + verification flow before launch.</p>
+    <div class="modal-step" id="modal-redirect" hidden>
+      <h2>You're in.</h2>
+      <p class="lede">Taking you to <span class="verify-email" id="redirect-target">app.apertur.app</span> — your email's already filled in, just set a password.</p>
     </div>
   </div>
 </div>
@@ -552,8 +547,8 @@
   var modal = document.getElementById('account-modal');
   var modalForm = document.getElementById('modal-form');
   var modalLoading = document.getElementById('modal-loading');
-  var modalVerify = document.getElementById('modal-verify');
-  var modalSteps = [modalForm, modalLoading, modalVerify];
+  var modalRedirect = document.getElementById('modal-redirect');
+  var modalSteps = [modalForm, modalLoading, modalRedirect];
   function showModalStep(el){
     modalSteps.forEach(function(s){ s.hidden = (s !== el); });
   }
@@ -600,17 +595,18 @@
       }).catch(function(err){ console.error('Klaviyo profile update failed', err); });
     }
 
-    // 20-second loading state, cycling through the quote list — no close button
-    // during this bit, matches "loading for 20 seconds" as a fixed, uninterruptible step.
+    // 20-second loading state, cycling through at most 3 quotes (picked at random
+    // from the pool each time) — no close button during this bit, it's a fixed,
+    // uninterruptible step.
     modalClose.hidden = true;
     showModalStep(modalLoading);
-    var shuffled = loadingQuotes.slice().sort(function(){ return Math.random() - 0.5; });
+    var picks = loadingQuotes.slice().sort(function(){ return Math.random() - 0.5; }).slice(0, 3);
     var qi = 0;
-    loadingQuoteEl.textContent = shuffled[0];
-    var totalMs = 20000, stepMs = 2000, elapsed = 0;
+    loadingQuoteEl.textContent = picks[0];
+    var totalMs = 20000, stepMs = totalMs / picks.length, elapsed = 0;
     quoteTimer = setInterval(function(){
-      qi = (qi + 1) % shuffled.length;
-      loadingQuoteEl.textContent = shuffled[qi];
+      qi = (qi + 1) % picks.length;
+      loadingQuoteEl.textContent = picks[qi];
     }, stepMs);
     barTimer = setInterval(function(){
       elapsed += 100;
@@ -620,20 +616,17 @@
     setTimeout(function(){
       clearInterval(quoteTimer);
       clearInterval(barTimer);
-      modalClose.hidden = false;
-      var verifyTarget = document.getElementById('verify-email-target');
-      verifyTarget.textContent = email || 'your email address';
-      showModalStep(modalVerify);
+      showModalStep(modalRedirect);
+      // Hand off to the real app with the email pre-filled — the visitor still
+      // sets their own password there. A hash, not a ?query= param: the app's
+      // server matches the root path with exact string equality, which breaks
+      // if any query string is appended. A hash never reaches the server, so
+      // it can't trip that. See the matching #email= read in
+      // Apertur_CARF_v3.html's AuthGate.
+      var target = 'https://app.apertur.app/' + (email ? ('#email=' + encodeURIComponent(email)) : '');
+      setTimeout(function(){ window.location.href = target; }, 1200);
     }, totalMs);
   });
-
-  document.getElementById('resend-btn').addEventListener('click', function(){
-    // Cosmetic only — see the flag under the buttons. No email is actually sent.
-    this.textContent = 'Sent!';
-    var btn = this;
-    setTimeout(function(){ btn.textContent = 'Resend email'; }, 2000);
-  });
-  document.getElementById('verify-done-btn').addEventListener('click', closeModal);
 })();
 </script>
 </body>

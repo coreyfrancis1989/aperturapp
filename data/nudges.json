@@ -1,0 +1,445 @@
+{
+  "version": 1,
+  "about": "Apertur's own library of behavioural principles for ad creative. Each entry is written in Apertur's words and cites the primary research it rests on. 'evidence' rates how well the finding has held up: strong (replicated, large literature), moderate (supported but with caveats or limited ad-specific evidence), mixed (replications disagree; treat as a test, not a fix).",
+  "categories": {
+    "attention": "Where the eye goes and what it skips",
+    "memory": "What sticks, and whether it sticks to the brand",
+    "persuasion": "Why people believe or act on the message",
+    "pricing": "How numbers and offers are read",
+    "choice": "How options and effort shape the decision",
+    "emotion": "How feeling drives engagement and recall"
+  },
+  "nudges": [
+    {
+      "id": "pictorial-superiority",
+      "name": "Pictures win the first look",
+      "category": "attention",
+      "principle": "In print and display ads the image takes the first and largest share of attention, whatever its size. The brand element and the text get what's left over.",
+      "ad_application": "Use the image to carry the brand, product or key benefit. Don't rely on the image to set things up for a payoff in the copy.",
+      "checks": [
+        "Does the dominant image show the product or the brand?",
+        "If someone looked only at the image, would they know who the ad is for?"
+      ],
+      "source": { "authors": "Pieters, R. & Wedel, M.", "year": 2004, "title": "Attention capture and transfer in advertising: Brand, pictorial, and text-size effects", "venue": "Journal of Marketing, 68(2)" },
+      "evidence": "strong"
+    },
+    {
+      "id": "text-size-attention",
+      "name": "Size buys text attention",
+      "category": "attention",
+      "principle": "Attention to text grows with its surface size. Readers spend more time on larger text but tend to skip small body copy altogether.",
+      "ad_application": "Put the message you need read into the headline. Treat body copy as optional for most viewers.",
+      "checks": [
+        "Is the one line you need read set large enough to be read?",
+        "Does any key claim sit only in small body copy?"
+      ],
+      "source": { "authors": "Pieters, R. & Wedel, M.", "year": 2004, "title": "Attention capture and transfer in advertising: Brand, pictorial, and text-size effects", "venue": "Journal of Marketing, 68(2)" },
+      "evidence": "strong"
+    },
+    {
+      "id": "isolation-effect",
+      "name": "The odd one out gets noticed",
+      "category": "attention",
+      "principle": "An item that differs from everything around it is noticed and remembered more than the items that blend in. This is the isolation, or von Restorff, effect.",
+      "ad_application": "Give the CTA or offer a single contrasting treatment: one colour, shape or size used nowhere else in the ad. If several elements are contrasted, none of them stands out.",
+      "checks": [
+        "Is exactly one element visually distinct from the rest?",
+        "Is that element the one you want acted on?"
+      ],
+      "source": { "authors": "von Restorff, H.", "year": 1933, "title": "Über die Wirkung von Bereichsbildungen im Spurenfeld", "venue": "Psychologische Forschung, 18" },
+      "evidence": "strong"
+    },
+    {
+      "id": "gaze-cueing",
+      "name": "Follow the face's gaze",
+      "category": "attention",
+      "principle": "People automatically shift their attention to where a face is looking. A face looking at the viewer holds attention on the face, and a face looking away sends it onward.",
+      "ad_application": "When a person appears in the ad, have them look at the product, headline or CTA rather than straight out at the viewer.",
+      "checks": [
+        "Is there a face in the creative?",
+        "Is its gaze pointed at the element you want seen next?"
+      ],
+      "source": { "authors": "Friesen, C. K. & Kingstone, A.", "year": 1998, "title": "The eyes have it! Reflexive orienting is triggered by nonpredictive gaze", "venue": "Psychonomic Bulletin & Review, 5(3)" },
+      "related_sources": [
+        { "authors": "Sajjacholapunt, P. & Ball, L. J.", "year": 2014, "title": "The influence of banner advertisements on attention and memory: Human faces with averted gaze can enhance advertising effectiveness", "venue": "Frontiers in Psychology, 5" }
+      ],
+      "evidence": "moderate",
+      "note": "Gaze cueing in the lab is robust. Ad-specific lifts come from a smaller set of eye-tracking studies."
+    },
+    {
+      "id": "processing-fluency",
+      "name": "Easy to read feels true",
+      "category": "persuasion",
+      "principle": "Information that is easy to take in, through clear type, high contrast and simple wording, is judged more likable, more familiar and more believable.",
+      "ad_application": "Use high-contrast, legible type and plain words for claims. Save visual difficulty for when you deliberately want people to slow down.",
+      "checks": [
+        "Is the text-to-background contrast strong at mobile size?",
+        "Could a ten-year-old read the headline on first pass?"
+      ],
+      "source": { "authors": "Reber, R., Schwarz, N. & Winkielman, P.", "year": 2004, "title": "Processing fluency and aesthetic pleasure: Is beauty in the perceiver's processing experience?", "venue": "Personality and Social Psychology Review, 8(4)" },
+      "evidence": "strong"
+    },
+    {
+      "id": "picture-superiority-memory",
+      "name": "Pictures outlast words in memory",
+      "category": "memory",
+      "principle": "People recognise images they have seen far more reliably than words or sentences they have read.",
+      "ad_application": "Make the brand memorable through a picture of something, such as a mascot, product shot or distinctive scene, not only through the brand name.",
+      "checks": [
+        "Is there a visual someone could recognise next week without the logo?"
+      ],
+      "source": { "authors": "Shepard, R. N.", "year": 1967, "title": "Recognition memory for words, sentences, and pictures", "venue": "Journal of Verbal Learning and Verbal Behavior, 6(1)" },
+      "evidence": "strong"
+    },
+    {
+      "id": "distinctive-assets",
+      "name": "Show the brand's distinctive assets",
+      "category": "memory",
+      "principle": "Consistent, ownable brand cues such as colours, characters, shapes, sounds and taglines help people recognise the brand quickly and link the ad to it.",
+      "ad_application": "Feature at least one established brand asset prominently and early. Don't swap it out just for the sake of novelty.",
+      "checks": [
+        "Is a known brand asset visible in the first second or frame?",
+        "Would a competitor's logo fit on this ad just as well?"
+      ],
+      "source": { "authors": "Romaniuk, J.", "year": 2018, "title": "Building Distinctive Brand Assets", "venue": "Oxford University Press" },
+      "evidence": "moderate",
+      "note": "Industry research (Ehrenberg-Bass) rather than controlled lab studies, but widely used in brand tracking."
+    },
+    {
+      "id": "early-branding",
+      "name": "Brand early in video",
+      "category": "memory",
+      "principle": "Viewers drop out of video ads fast. The brand needs to show up while attention is still high, or the ad's effect isn't linked to the brand.",
+      "ad_application": "Get the brand or product on screen in the first seconds. Weave it into the action instead of placing a logo slab that prompts a skip.",
+      "checks": [
+        "When does the brand first appear?",
+        "Is it part of the action or an interruption?"
+      ],
+      "source": { "authors": "Teixeira, T., Wedel, M. & Pieters, R.", "year": 2012, "title": "Emotion-induced engagement in internet video advertisements", "venue": "Journal of Marketing Research, 49(2)" },
+      "evidence": "moderate",
+      "note": "The same work finds that heavy-handed early branding can increase skipping, so test brand placement and prominence together."
+    },
+    {
+      "id": "mere-exposure",
+      "name": "Familiar becomes liked",
+      "category": "memory",
+      "principle": "Repeated exposure to a stimulus increases liking for it, even when people don't consciously remember seeing it.",
+      "ad_application": "Keep the core creative and brand assets consistent across a campaign so each exposure builds on the last. Refresh what's around them instead.",
+      "checks": [
+        "Do the cuts in this campaign share recognisable elements?"
+      ],
+      "source": { "authors": "Zajonc, R. B.", "year": 1968, "title": "Attitudinal effects of mere exposure", "venue": "Journal of Personality and Social Psychology, 9(2, Pt.2)" },
+      "evidence": "strong",
+      "note": "Effects level off and can reverse with heavy repetition. Wear-out is real."
+    },
+    {
+      "id": "serial-position",
+      "name": "First and last are remembered",
+      "category": "memory",
+      "principle": "In a sequence, items at the start and the end are recalled better than those in the middle.",
+      "ad_application": "In video or carousels, put the brand and key benefit in the opening and the closing frames, not mid-sequence.",
+      "checks": [
+        "What is in the first frame or card, and the last?"
+      ],
+      "source": { "authors": "Murdock, B. B.", "year": 1962, "title": "The serial position effect of free recall", "venue": "Journal of Experimental Psychology, 64(5)" },
+      "evidence": "strong"
+    },
+    {
+      "id": "peak-end",
+      "name": "Peak and ending shape the memory",
+      "category": "emotion",
+      "principle": "People judge an experience mostly by its most intense moment and by how it ends, not by its total length.",
+      "ad_application": "Build longer video toward one clear emotional peak and land a strong ending with the brand present.",
+      "checks": [
+        "Is there one clear high point?",
+        "Does the ad end on a strong note with the brand, or trail off?"
+      ],
+      "source": { "authors": "Kahneman, D., Fredrickson, B. L., Schreiber, C. A. & Redelmeier, D. A.", "year": 1993, "title": "When more pain is preferred to less: Adding a better end", "venue": "Psychological Science, 4(6)" },
+      "evidence": "strong"
+    },
+    {
+      "id": "emotional-long-term",
+      "name": "Emotion builds the brand, rational sells now",
+      "category": "emotion",
+      "principle": "Across a large database of effectiveness cases, emotionally led campaigns tended to drive bigger long-term business effects, while rational, offer-led activity drove short-term sales.",
+      "ad_application": "Match the ad's register to its job. Brand-building cuts should lead with feeling, and activation cuts with a clear offer and action.",
+      "checks": [
+        "Is this cut meant to build the brand or to convert now?",
+        "Does its emotional register match that job?"
+      ],
+      "source": { "authors": "Binet, L. & Field, P.", "year": 2013, "title": "The Long and the Short of It", "venue": "IPA" },
+      "evidence": "moderate",
+      "note": "Based on observational analysis of award-entry cases, not experiments."
+    },
+    {
+      "id": "social-proof",
+      "name": "Show what others do",
+      "category": "persuasion",
+      "principle": "People look to what others like them are doing, especially when they're unsure. Messages about others' behaviour can change actions more than direct appeals do.",
+      "ad_application": "Use real, specific proof such as customer counts, ratings or 'most chosen' tags. Proof from people similar to the audience works best.",
+      "checks": [
+        "Is there any evidence that others choose this?",
+        "Is it specific and credible, rather than 'loved by thousands'?"
+      ],
+      "source": { "authors": "Goldstein, N. J., Cialdini, R. B. & Griskevicius, V.", "year": 2008, "title": "A room with a viewpoint: Using social norms to motivate environmental conservation in hotels", "venue": "Journal of Consumer Research, 35(3)" },
+      "evidence": "strong",
+      "note": "Don't advertise that a bad behaviour is common ('most people don't…'). That normalises it."
+    },
+    {
+      "id": "authority",
+      "name": "Credible authority lends weight",
+      "category": "persuasion",
+      "principle": "People defer to sources they see as expert or legitimate.",
+      "ad_application": "Cite relevant expertise, certifications or endorsements, and make sure they're real and relevant to the claim.",
+      "checks": [
+        "Is there a credible expert or institutional signal?",
+        "Is it relevant to this product's claim?"
+      ],
+      "source": { "authors": "Milgram, S.", "year": 1963, "title": "Behavioral study of obedience", "venue": "Journal of Abnormal and Social Psychology, 67(4)" },
+      "evidence": "moderate",
+      "note": "The classic evidence is extreme. Ad effects depend heavily on how credible and relevant the source is."
+    },
+    {
+      "id": "reason-why",
+      "name": "Give a reason",
+      "category": "persuasion",
+      "principle": "Requests that come with a reason get more compliance, especially for small asks, even when the reason adds little.",
+      "ad_application": "Pair the CTA with a short reason why, e.g. 'Book now, because slots fill by Friday'.",
+      "checks": [
+        "Does the CTA say why to act, not just what to do?"
+      ],
+      "source": { "authors": "Langer, E., Blank, A. & Chanowitz, B.", "year": 1978, "title": "The mindlessness of ostensibly thoughtful action: The role of 'placebic' information in interpersonal interaction", "venue": "Journal of Personality and Social Psychology, 36(6)" },
+      "evidence": "moderate"
+    },
+    {
+      "id": "rhyme-as-reason",
+      "name": "Rhymes ring true",
+      "category": "persuasion",
+      "principle": "The same statement is judged more accurate when it rhymes than when it doesn't.",
+      "ad_application": "For a tagline or key claim, test a rhyming or rhythmic version.",
+      "checks": [
+        "Is the tagline easy to say and repeat?"
+      ],
+      "source": { "authors": "McGlone, M. S. & Tofighbakhsh, J.", "year": 2000, "title": "Birds of a feather flock conjointly (?): Rhyme as reason in aphorisms", "venue": "Psychological Science, 11(5)" },
+      "evidence": "moderate"
+    },
+    {
+      "id": "reciprocity",
+      "name": "Give first",
+      "category": "persuasion",
+      "principle": "Receiving something unprompted makes people more willing to give something back.",
+      "ad_application": "Lead with genuine value, such as a free tool, sample or useful tip, before the ask.",
+      "checks": [
+        "Does the ad offer something of value before asking?"
+      ],
+      "source": { "authors": "Regan, D. T.", "year": 1971, "title": "Effects of a favor and liking on compliance", "venue": "Journal of Experimental Social Psychology, 7(6)" },
+      "evidence": "strong"
+    },
+    {
+      "id": "pratfall",
+      "name": "A small flaw can build trust",
+      "category": "persuasion",
+      "principle": "A competent person who shows a minor flaw can become more likable than one who seems flawless.",
+      "ad_application": "For established, trusted brands, admitting a small, honest downside can make the main claim more believable.",
+      "checks": [
+        "Is the brand already seen as competent? (If not, skip this.)"
+      ],
+      "source": { "authors": "Aronson, E., Willerman, B. & Floyd, J.", "year": 1966, "title": "The effect of a pratfall on increasing interpersonal attractiveness", "venue": "Psychonomic Science, 4(6)" },
+      "evidence": "mixed",
+      "note": "Only helps when competence is already established. It can backfire otherwise."
+    },
+    {
+      "id": "identifiable-victim",
+      "name": "One person beats a statistic",
+      "category": "emotion",
+      "principle": "A single, specific individual draws more sympathy and action than statistics about many. Adding statistics can even weaken the response.",
+      "ad_application": "For cause or impact messaging, lead with one real person's story rather than aggregate numbers.",
+      "checks": [
+        "Is there one specific person the viewer can picture?"
+      ],
+      "source": { "authors": "Small, D. A., Loewenstein, G. & Slovic, P.", "year": 2007, "title": "Sympathy and callousness: The impact of deliberative thought on donations to identifiable and statistical victims", "venue": "Organizational Behavior and Human Decision Processes, 102(2)" },
+      "evidence": "moderate"
+    },
+    {
+      "id": "curiosity-gap",
+      "name": "Open a gap people want closed",
+      "category": "attention",
+      "principle": "Curiosity arises when people notice a gap in their knowledge, and they're motivated to close it.",
+      "ad_application": "Use a headline or opening that poses a specific question or partial reveal, and make sure the ad or landing page actually answers it.",
+      "checks": [
+        "Does the opening create a specific question?",
+        "Is it paid off, or is it clickbait?"
+      ],
+      "source": { "authors": "Loewenstein, G.", "year": 1994, "title": "The psychology of curiosity: A review and reinterpretation", "venue": "Psychological Bulletin, 116(1)" },
+      "evidence": "moderate"
+    },
+    {
+      "id": "self-reference",
+      "name": "Make it about the viewer",
+      "category": "memory",
+      "principle": "Information processed in relation to oneself is remembered better than information processed in other ways.",
+      "ad_application": "Frame copy around the viewer's situation ('your mornings', 'your team') instead of the brand's features.",
+      "checks": [
+        "Does the headline talk about the viewer or about the brand?"
+      ],
+      "source": { "authors": "Rogers, T. B., Kuiper, N. A. & Kirker, W. S.", "year": 1977, "title": "Self-reference and the encoding of personal information", "venue": "Journal of Personality and Social Psychology, 35(9)" },
+      "evidence": "strong"
+    },
+    {
+      "id": "scarcity",
+      "name": "Scarce looks valuable",
+      "category": "persuasion",
+      "principle": "Items seem more desirable when they're scarce, and more so when they've recently become scarce.",
+      "ad_application": "Use real limits such as stock, dates or capacity, and say them specifically. Fake urgency erodes trust and may breach advertising rules.",
+      "checks": [
+        "Is the limit real and specific?",
+        "Is the deadline or quantity stated plainly?"
+      ],
+      "source": { "authors": "Worchel, S., Lee, J. & Adewole, A.", "year": 1975, "title": "Effects of supply and demand on ratings of object value", "venue": "Journal of Personality and Social Psychology, 32(5)" },
+      "evidence": "strong"
+    },
+    {
+      "id": "loss-framing",
+      "name": "Losses loom larger than gains",
+      "category": "persuasion",
+      "principle": "Losing something feels worse than gaining the same thing feels good, so how an outcome is framed changes choices.",
+      "ad_application": "Test framing the benefit as avoiding a loss ('stop losing 3 hours a week') against the gain version.",
+      "checks": [
+        "Has the loss-framed version of the claim been tested?"
+      ],
+      "source": { "authors": "Tversky, A. & Kahneman, D.", "year": 1981, "title": "The framing of decisions and the psychology of choice", "venue": "Science, 211(4481)" },
+      "related_sources": [
+        { "authors": "Kahneman, D. & Tversky, A.", "year": 1979, "title": "Prospect theory: An analysis of decision under risk", "venue": "Econometrica, 47(2)" }
+      ],
+      "evidence": "strong",
+      "note": "Framing effects are robust, but which frame wins in a given ad varies, so treat it as a test."
+    },
+    {
+      "id": "anchoring",
+      "name": "The first number sets the scale",
+      "category": "pricing",
+      "principle": "An initial number, even an arbitrary one, pulls later estimates toward it.",
+      "ad_application": "Show a reference point before the price, such as the original price, the cost of the alternative or the value delivered.",
+      "checks": [
+        "What number does the viewer see before the price?"
+      ],
+      "source": { "authors": "Tversky, A. & Kahneman, D.", "year": 1974, "title": "Judgment under uncertainty: Heuristics and biases", "venue": "Science, 185(4157)" },
+      "evidence": "strong",
+      "note": "Reference prices must be genuine to comply with pricing rules."
+    },
+    {
+      "id": "precise-numbers",
+      "name": "Precise numbers seem considered",
+      "category": "pricing",
+      "principle": "Precise figures (e.g. 4,850) act as tighter anchors than round ones (5,000), and people adjust less from them.",
+      "ad_application": "Use precise figures for stats and claims ('saves 47 minutes'). Round numbers can read as guesses.",
+      "checks": [
+        "Are the key stats specific or rounded?"
+      ],
+      "source": { "authors": "Janiszewski, C. & Uy, D.", "year": 2008, "title": "Precision of the anchor influences the amount of adjustment", "venue": "Psychological Science, 19(2)" },
+      "evidence": "moderate"
+    },
+    {
+      "id": "left-digit",
+      "name": "The left digit dominates",
+      "category": "pricing",
+      "principle": "People judge prices largely by the leftmost digit, so £2.99 feels meaningfully cheaper than £3.00.",
+      "ad_application": "Where it fits the brand's positioning, price just under a left-digit boundary.",
+      "checks": [
+        "Does the price sit just below a round number?",
+        "Would .99 pricing clash with a premium position?"
+      ],
+      "source": { "authors": "Thomas, M. & Morwitz, V.", "year": 2005, "title": "Penny wise and pound foolish: The left-digit effect in price cognition", "venue": "Journal of Consumer Research, 32(1)" },
+      "evidence": "strong"
+    },
+    {
+      "id": "zero-price",
+      "name": "Free is a different category",
+      "category": "pricing",
+      "principle": "A price of zero is treated as special. Demand jumps far more than a small price cut would predict.",
+      "ad_application": "If something can genuinely be free, such as a trial, shipping or a first item, say 'free' rather than offering a small discount.",
+      "checks": [
+        "Is there anything in the offer that could be framed as free?"
+      ],
+      "source": { "authors": "Shampanier, K., Mazar, N. & Ariely, D.", "year": 2007, "title": "Zero as a special price: The true value of free products", "venue": "Marketing Science, 26(6)" },
+      "evidence": "moderate"
+    },
+    {
+      "id": "decoy",
+      "name": "A decoy makes the target shine",
+      "category": "pricing",
+      "principle": "Adding an option that is clearly worse than one choice, but not the other, shifts preference toward the option it makes look good.",
+      "ad_application": "When showing tiers, make sure a nearby option makes the tier you want chosen look like clearly better value.",
+      "checks": [
+        "Is there a tier that is obviously beaten by your target tier?"
+      ],
+      "source": { "authors": "Huber, J., Payne, J. W. & Puto, C.", "year": 1982, "title": "Adding asymmetrically dominated alternatives: Violations of regularity and the similarity hypothesis", "venue": "Journal of Consumer Research, 9(1)" },
+      "evidence": "moderate",
+      "note": "Strong in lab settings, with weaker and more variable effects in some field and replication studies."
+    },
+    {
+      "id": "choice-overload",
+      "name": "Fewer options, more action",
+      "category": "choice",
+      "principle": "Showing many options can lower the chance that people choose anything.",
+      "ad_application": "Show one product and one action per ad. Save the range for the landing page.",
+      "checks": [
+        "How many products or actions does this ad present?"
+      ],
+      "source": { "authors": "Iyengar, S. S. & Lepper, M. R.", "year": 2000, "title": "When choice is demotivating: Can one desire too much of a good thing?", "venue": "Journal of Personality and Social Psychology, 79(6)" },
+      "related_sources": [
+        { "authors": "Scheibehenne, B., Greifeneder, R. & Todd, P. M.", "year": 2010, "title": "Can there ever be too many options? A meta-analytic review of choice overload", "venue": "Journal of Consumer Research, 37(3)" }
+      ],
+      "evidence": "mixed",
+      "note": "The meta-analysis found an average effect near zero with large variation. One focused message is still a sound default for ads."
+    },
+    {
+      "id": "defaults",
+      "name": "Defaults stick",
+      "category": "choice",
+      "principle": "People tend to stay with whatever option is pre-selected.",
+      "ad_application": "On the click-through, pre-select the recommended plan or option the ad promoted, and keep it honest and easy to change.",
+      "checks": [
+        "Does the landing page pre-select what the ad promised?"
+      ],
+      "source": { "authors": "Johnson, E. J. & Goldstein, D.", "year": 2003, "title": "Do defaults save lives?", "venue": "Science, 302(5649)" },
+      "evidence": "strong"
+    },
+    {
+      "id": "endowed-progress",
+      "name": "A head start motivates completion",
+      "category": "choice",
+      "principle": "People are more likely to finish a goal when they feel they've already made progress toward it, even if that progress was given to them.",
+      "ad_application": "For loyalty, onboarding or multi-step offers, show the viewer as already part of the way there.",
+      "checks": [
+        "Can the offer be framed as already started?"
+      ],
+      "source": { "authors": "Nunes, J. C. & Drèze, X.", "year": 2006, "title": "The endowed progress effect: How artificial advancement increases effort", "venue": "Journal of Consumer Research, 32(4)" },
+      "evidence": "moderate"
+    },
+    {
+      "id": "goal-gradient",
+      "name": "Effort rises near the finish",
+      "category": "choice",
+      "principle": "People speed up their effort as they get closer to a reward.",
+      "ad_application": "In retargeting, remind people how close they are ('one step left', 'one stamp to go').",
+      "checks": [
+        "For retargeting, does the ad show how close the viewer is to finishing?"
+      ],
+      "source": { "authors": "Kivetz, R., Urminsky, O. & Zheng, Y.", "year": 2006, "title": "The goal-gradient hypothesis resurrected: Purchase acceleration, illusionary goal progress, and customer retention", "venue": "Journal of Marketing Research, 43(1)" },
+      "evidence": "moderate"
+    },
+    {
+      "id": "foot-in-the-door",
+      "name": "Small yes before big yes",
+      "category": "choice",
+      "principle": "Agreeing to a small request makes people more likely to agree to a larger one later.",
+      "ad_application": "Make the ad's CTA a small step, such as a quiz, sample or calculator, rather than asking for the full purchase upfront.",
+      "checks": [
+        "Is the CTA the smallest sensible step toward the sale?"
+      ],
+      "source": { "authors": "Freedman, J. L. & Fraser, S. C.", "year": 1966, "title": "Compliance without pressure: The foot-in-the-door technique", "venue": "Journal of Personality and Social Psychology, 4(2)" },
+      "evidence": "moderate"
+    }
+  ]
+}
